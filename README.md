@@ -2,7 +2,9 @@ Symfony Proxy Bundle
 ====
 
 How to use it:
+
 1. Clone this repo
+
 2. Execute command
 ```
     cd remoteserver
@@ -10,11 +12,13 @@ How to use it:
     node index.js
 ```
 Node server will be started.
+
 2. in another terminal instance in root project path
 ```
     php bin/console server:run
 ```
 Symfony will be started
+
 3. Use postman to test these routes:
 ```
     GET localhost:8000
@@ -26,6 +30,7 @@ Symfony will be started
 You will see JSON-result from remote server and from local controller action.
 
 4. You can create any middleware and use it in routes
+
 5. You can use your own routes, using strings or regular expressions
 
 ### Some information
