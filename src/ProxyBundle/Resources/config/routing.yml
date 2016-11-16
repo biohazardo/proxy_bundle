@@ -1,0 +1,3 @@
+proxy_homepage:
+    path:     /
+    defaults: { _controller: ProxyBundle:Default:index }
