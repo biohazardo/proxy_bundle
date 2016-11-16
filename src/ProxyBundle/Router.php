@@ -27,18 +27,23 @@ class Router
             if (empty($route['middleware']) && empty($route['address'])) {
                 throw new \Exception("Need to define address or middleware for route");
             }
+            $pregMatches = null; // если будет проверка по соответствиям, то их надо запомнить, и передать в middleware
             $relevant = false; // признак подходящего маршрута
             if (!empty($route['path']) && $path === $route['path']) {
                 $relevant = true;
             } else if (!empty($route['regexp'])) {
-                throw new \Exception('Regexp not implemented now');
+//                $regexp = preg_quote($route['regexp']);
+                $count = preg_match_all($route['regexp'], $path, $matches);
+                if ($count > 0) {
+                    $relevant = true;
+                }
+                $pregMatches = $matches[1];
             }
             if ($relevant) {
                 // Маршрут подходит
-                $address = $route['address'];
-                if (!empty($address)) {
+                if (!empty($route['address'])) {
                     return [
-                        'url' => $address,
+                        'url' => $route['address'],
                         'method' => $method,
                         'params' => $params
                     ];
@@ -46,7 +51,12 @@ class Router
                     // middleware модифицирует параметры
                     $className = $route['middleware'];
                     $middleware = new $className();
-                    return $middleware->makeRequest($path, $method, $params); // middleware подготовит данные
+                    return $middleware->updateRequestData([
+                        'url' => !empty($route['address']) ? $route['address'] : null,
+                        'method' => $method,
+                        'params' => $params,
+                        'preg_matches' => $pregMatches
+                    ]); // middleware подготовит данные
                 }
             }
         }

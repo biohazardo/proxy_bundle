@@ -28,9 +28,11 @@ class ProxyListener {
         } else if (in_array($request->getMethod(), ['POST', 'PUT', 'DELETE'])) {
             $params = $request->request->all();
         }
-        $response = $this->remote_server->handleRequest($uri, $request->getMethod(), $params);
+        $result = $this->remote_server->handleRequest($uri, $request->getMethod(), $params);
+        list($code, $response) = $result;
         if ($response) {
             $request->attributes->set('remote_server_response', $response);
+            $request->attributes->set('remote_server_status_code', $code);
         }
     }
 }

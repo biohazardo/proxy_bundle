@@ -19,6 +19,6 @@ parameters:
             path: /delete
             address: http://localhost:8888/resource
 
-#        xyzpath:
-#            regexp: /xyz/(A-Za-z0-9) # регулярки могут быть использованы лишь с middleware, которые соберут url запроса
-#            middleware: ProxyBundle\Middleware\XYZMiddleware
+        xyzpath:
+            regexp: /^\/xyz\/([0-9]+)/ # регулярки могут быть использованы лишь с middleware, которые соберут url запроса
+            middleware: ProxyBundle\Middleware\XYZMiddleware
