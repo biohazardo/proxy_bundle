@@ -36,7 +36,7 @@ You will see JSON-result from remote server and from local controller action.
 ### Some information
 - Proxy can handle 4 http methods: GET, POST, PUT, DELETE.
 - Routes for proxy can be configured in /src/ProxyBundle/config/config.yml
-- You can use middleware and write custom code to route request. Middlewares in /src/ProxyBundle/Middleware folder
+- You can use middleware and write custom code to route request. Middlewares are in /src/ProxyBundle/Middleware folder
 
 
 
