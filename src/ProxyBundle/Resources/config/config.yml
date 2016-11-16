@@ -1,0 +1,13 @@
+parameters:
+    proxy_routes:
+        root:
+            path:     /
+            address: http://localhost:8888
+
+        abcpath:
+            path:    /abc
+            address: http://localhost:8888/abc
+
+        xyzpath:
+            regexp: /xyz/(A-Za-z0-9) # регулярки могут быть использованы лишь с middleware, которые соберут url запроса
+            middleware: ProxyBundle\Middleware\XYZMiddleware

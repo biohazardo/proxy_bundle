@@ -1,6 +1,14 @@
 services:
+  proxy.router:
+    class: ProxyBundle\Router
+    arguments: ['@service_container']
+
+  proxy.remote_server:
+    class: ProxyBundle\RemoteServer
+    arguments: ['@service_container', '@proxy.router']
+
   listener.requestresponse:
     class: ProxyBundle\Listener\ProxyListener
-    arguments: []
+    arguments: ['@service_container', '@proxy.remote_server']
     tags:
           - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
