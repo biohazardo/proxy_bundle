@@ -1,4 +1,6 @@
 services:
-#    proxy.example:
-#        class: ProxyBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  listener.requestresponse:
+    class: ProxyBundle\Listener\ProxyListener
+    arguments: []
+    tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

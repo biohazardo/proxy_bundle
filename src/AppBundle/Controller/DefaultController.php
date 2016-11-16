@@ -13,6 +13,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return 'Index of default controller';
+        print_r($request->get('remote_server_response'));
+        return $this->json([]);
+    }
+
+    /**
+     * @Route("/test", name="testroute")
+     */
+    public function testAction(Request $request) {
+        return $this->json(['test']);
     }
 }
