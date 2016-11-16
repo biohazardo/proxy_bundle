@@ -13,15 +13,42 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        print_r($request->get('remote_server_response'));
-        return $this->json([]);
+        return $this->json([
+            'message' => 'Запрос к корневому урлу удачно завершился',
+            'remote_data' => $request->get('remote_server_response')
+        ]);
     }
 
     /**
-     * @Route("/test", name="testroute")
+     * @Route("/post", name="postroute")
      */
-    public function testAction(Request $request) {
-        print_r($request->get('remote_server_response'));
-        return $this->json(['test']);
+    public function postAction(Request $request) {
+        return $this->json([
+            'message' => 'Запрос к /post урлу удачно завершился. Использовался метод POST',
+            'remote_data' => $request->get('remote_server_response')
+        ]);
+
+    }
+
+    /**
+     * @Route("/put", name="putroute")
+     */
+    public function putAction(Request $request) {
+        return $this->json([
+            'message' => 'Запрос к /put урлу удачно завершился. Использовался метод PUT',
+            'remote_data' => $request->get('remote_server_response')
+        ]);
+
+    }
+
+    /**
+     * @Route("/delete", name="deleteroute")
+     */
+    public function deleteAction(Request $request) {
+        return $this->json([
+            'message' => 'Запрос к /delete урлу удачно завершился. Использовался метод DELETE',
+            'remote_data' => $request->get('remote_server_response')
+        ]);
+
     }
 }

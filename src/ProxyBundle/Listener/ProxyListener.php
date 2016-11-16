@@ -25,10 +25,9 @@ class ProxyListener {
         // Параметры запроса
         if ($request->getMethod() === 'GET') {
             $params = $request->query->all();
-        } else if ($request->getMethod() === 'POST') {
+        } else if (in_array($request->getMethod(), ['POST', 'PUT', 'DELETE'])) {
             $params = $request->request->all();
         }
-
         $response = $this->remote_server->handleRequest($uri, $request->getMethod(), $params);
         if ($response) {
             $request->attributes->set('remote_server_response', $response);

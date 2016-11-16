@@ -36,9 +36,22 @@ class RemoteServer
             $url .= '?' . http_build_query($params);
         }
         $ch = curl_init($url);
-        if ($method === 'POST') {
-            curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        if ($method === 'POST' || $method === 'PUT' || $method === 'DELETE') {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+            switch ($method) {
+                case 'POST':
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    break;
+                case 'PUT':
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+                    break;
+
+                case 'DELETE':
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                    break;
+
+            }
         }
         if (! $response = curl_exec($ch)) {
             throw new \Exception(curl_error($ch));

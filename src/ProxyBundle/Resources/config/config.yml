@@ -4,9 +4,20 @@ parameters:
             path:     /
             address: http://localhost:8888
 
-        abcpath:
-            path:    /abc
-            address: http://localhost:8888/abc
+        postpath:
+            method: POST
+            path: /post
+            address: http://localhost:8888/resource
+#
+        putpath: # для тестирования нестандартных HTTP-методов
+            method: PUT
+            path: /put
+            address: http://localhost:8888/resource
+
+        deletepath: # для тестирования нестандартных HTTP-методов
+            method: DELETE
+            path: /delete
+            address: http://localhost:8888/resource
 
 #        xyzpath:
 #            regexp: /xyz/(A-Za-z0-9) # регулярки могут быть использованы лишь с middleware, которые соберут url запроса
