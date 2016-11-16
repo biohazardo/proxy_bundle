@@ -15,6 +15,7 @@ Node server will be started.
 
 - in another terminal instance in root project path
 ```
+    composer install
     php bin/console server:run
 ```
 Symfony will be started
